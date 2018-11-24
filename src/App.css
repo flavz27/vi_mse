@@ -30,3 +30,29 @@
     transform: rotate(360deg);
   }
 }
+
+/* CUSTOM */
+
+div.timelineContainer {
+  width: 100%;
+  background-color:#B2B6BB;
+}
+
+div.mapContainer{
+  width:70%;
+  left: 0;
+  background-color: #0092FF;
+  display: inline-block;
+}
+div.gamesContainer{
+  width:30%;
+  right: 0;
+  background-color: #F95F62;
+  float:right;
+  display: inline-block;
+
+}
+div.chartsContainer {
+  width: 100%;
+  border:pink 10px;
+}
