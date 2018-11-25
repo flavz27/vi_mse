@@ -4,7 +4,7 @@ import '../App.css';
 class Charts extends Component {
     render(){
         return(
-            <div class="chartsContainer">Charts</div>
+            <div className="chartsContainer">Charts</div>
         )
        
     }

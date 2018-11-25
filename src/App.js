@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Timeline from './components/Timeline'
 import CustomMap from './components/CustomMap'
 import ReleasedGames from './components/ReleasedGames'
 import Charts from './components/Charts'
+import key from './API_KEY.json';
 
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      API_KEY : key.API_KEY
+    }
+  }
+  
   render() {
+   
     return (
       <div className="App">
-      <div class="header">
-        <h1>Video games and crime</h1>
-        <p>lorem ipsum __</p>
-      </div>
+        <div className="header">
+          <h1>Video games and crime</h1>
+          <p>lorem ipsum __</p>
+        </div>
         <Timeline />
         <CustomMap />
-        <ReleasedGames />
+        <ReleasedGames {...this.state}/>
         <Charts />
       </div>
     );
   }
+
+
 }
 
 export default App;

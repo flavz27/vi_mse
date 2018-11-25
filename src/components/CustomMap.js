@@ -4,7 +4,7 @@ import '../App.css';
 class CustomMap extends Component {
     render(){
         return(
-            <div class="mapContainer">CustomMap</div>
+            <div className="mapContainer">CustomMap</div>
         )
        
     }
