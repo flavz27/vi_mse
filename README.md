@@ -8,7 +8,7 @@
 
 ### Custom configs
 
-Include am 'API_KEY.json' file under the 'src' directory with the following structure, where 'CONTENT' is the api key from mlab itself.
+Include am `API_KEY.json` file under the `src` directory with the following structure, where `CONTENT` is the api key from mlab itself.
 
 ```json
 {
