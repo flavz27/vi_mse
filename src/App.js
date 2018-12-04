@@ -11,19 +11,20 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      API_KEY : key.API_KEY
+      API_KEY : key.API_KEY,
+      selectedYear: "2015"
     }
   }
-  
+
   render() {
-   
+
     return (
       <div className="App">
         <div className="header">
           <h1>Video games and crime</h1>
           <p>lorem ipsum __</p>
         </div>
-        <Timeline />
+        <Timeline {...this.state}/>
         <CustomMap />
         <ReleasedGames {...this.state}/>
         <Charts />

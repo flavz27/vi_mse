@@ -6,18 +6,19 @@ class ReleasedGames extends Component {
         super();
         this.state= {
             games: []
+
         };
     }
     componentDidMount(){
-        fetch("https://api.mlab.com/api/1/databases/gamessalestests/collections/games?apiKey="+this.props.API_KEY)
+        fetch("https://api.mlab.com/api/1/databases/gamessales/collections/games?apiKey="+this.props.API_KEY+"&q={yearOfRelease:"+this.props.selectedYear+"}?s={globalSales: -1}")
         .then(res => res.json())
         .then(
           (result) => {
             this.setState({
               isLoaded: true,
-              items: result.items
+              games: result
             });
-            console.log("ok");
+            this.renderTopReleasedGames()
           },
           (error) => {
             this.setState({
@@ -28,11 +29,17 @@ class ReleasedGames extends Component {
           }
         )
     }
+
+    renderTopReleasedGames(){
+    //  console.log(this.state.games)
+      this.state.games.sort()
+      console.log(this.state.games)
+    }
     render(){
         return(
             <div className="gamesContainer">ReleasedGames</div>
         )
-       
+
     }
 
 

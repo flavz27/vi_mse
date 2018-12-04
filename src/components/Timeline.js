@@ -5,7 +5,10 @@ class Timeline extends Component {
 
     render(){
         return(
-            <div className="timelineContainer">Timeline</div>
+            <div className="timelineContainer">
+              <h3>selected year: </h3> <p>{this.props.selectedYear}</p>
+            </div>
+
         )
     }
 }
