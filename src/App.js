@@ -12,7 +12,7 @@ class App extends Component {
     super();
     this.state={
       API_KEY : key.API_KEY,
-      selectedYear: "2015"
+      selectedYear: "2014"
     }
   }
 

@@ -5,7 +5,8 @@ class ReleasedGames extends Component {
     constructor(){
         super();
         this.state= {
-            games: []
+            games: [],
+            releasedGamesYear: []
 
         };
     }
@@ -32,18 +33,38 @@ class ReleasedGames extends Component {
 
     renderTopReleasedGames(){
     //  console.log(this.state.games)
-      this.state.games.sort()
-      console.log(this.state.games)
+    var lookup = {};
+    var items = this.state.games;
+    var releasedGames = [];
+    
+    for (var item, i = 0; item = items[i++];) {
+      var name = item.name;
+    
+      if (!(name in lookup)) {
+        lookup[name] = 1;
+        releasedGames.push(name);
+      }
+    }
+    releasedGames = releasedGames.slice(1,11)
+      
+      this.setState({releasedGamesYear: releasedGames})
+
+      console.log(this.state.releasedGamesYear)
     }
     render(){
-        return(
-            <div className="gamesContainer">ReleasedGames</div>
-        )
 
+        return (
+          <div className="gamesContainer"><h2 className="titletwo">Top games of {this.props.selectedYear}</h2>
+          <ul className="gamesListYear">
+            {this.state.releasedGamesYear.map(game => (
+              <li>
+               {game}
+              </li>
+            ))}
+          </ul>
+          </div>
+        );
     }
-
-
 }
-
 
 export default ReleasedGames
