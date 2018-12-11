@@ -17,12 +17,11 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
         <div className="header">
           <h1>Video games and crime</h1>
-          <p>lorem ipsum __</p>
+          <p>lorem ipsum</p>
         </div>
         <Timeline {...this.state}/>
         <CustomMap />
