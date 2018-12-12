@@ -12,10 +12,10 @@ class CustomMap extends Component {
             <div className="mapContainer">
                 <Map
                     style="mapbox://styles/mapbox/dark-v9"
-                // containerStyle={{
-                //     height: "500px",
-                //     width: "900px"
-                // }}
+                containerStyle={{
+                    height: "500px",
+                    width: "900px"
+                }}
                 >
                     {/* <Layer
                         type="symbol"

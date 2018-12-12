@@ -45,7 +45,7 @@ class ReleasedGames extends Component {
         releasedGames.push(name);
       }
     }
-    releasedGames = releasedGames.slice(1,11)
+    releasedGames = releasedGames.slice(1,5)
       
       this.setState({releasedGamesYear: releasedGames})
 
