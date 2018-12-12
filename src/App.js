@@ -16,6 +16,11 @@ class App extends Component {
     }
   }
 
+  handleSelectedYear = (selectedYearVal) => {
+    this.setState({selectedYear: selectedYearVal});
+    console.log("changed year")
+  }
+
   render() {
     return (
       <div className="App">
@@ -23,7 +28,7 @@ class App extends Component {
           <h1>Video games and crime</h1>
           <p>lorem ipsum</p>
         </div>
-        <Timeline {...this.state}/>
+        <Timeline onSelectYear={this.handleSelectedYear}{...this.state} />
         <CustomMap />
         <ReleasedGames {...this.state}/>
         <Charts />

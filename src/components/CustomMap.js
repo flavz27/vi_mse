@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import '../App.css';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 class CustomMap extends Component {
-    render(){
-        return(
+
+    render() {
+
+        const Map = ReactMapboxGl({
+            accessToken: "pk.eyJ1IjoiZmxhdnptc2UiLCJhIjoiY2pwa2U0cGl1MDJlNDN4bXJiMHVjMjZwNyJ9.J9a8ZVU_RCEbAioPyvIRhA"
+        });
+        return (
             <div className="mapContainer">
-                <Map google={this.props.google} zoom={14}>
-
-                    <Marker onClick={this.onMarkerClick}
-                            name={'Current location'} />
-
-                    {/* <InfoWindow onClose={this.onInfoWindowClose}>
-                        <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
-                        </div>
-                    </InfoWindow> */}
+                <Map
+                    style="mapbox://styles/mapbox/dark-v9"
+                // containerStyle={{
+                //     height: "500px",
+                //     width: "900px"
+                // }}
+                >
+                    {/* <Layer
+                        type="symbol"
+                        id="marker"
+                        layout={{ "icon-image": "marker-15" }}>
+                        <Feature coordinates={[0, 0]} />
+                    </Layer> */}
                 </Map>
             </div>
         )
-       
+
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: ("AIzaSyCeAPC63sfhFpy1ZcknjNK64Q-yocc-JXE")
-  })(CustomMap)
+export default CustomMap
