@@ -65,9 +65,9 @@ class Charts extends Component {
         crimeData.sort().map((crime) => {
             console.log(crime)
             crimeLabels.push(crime[0])
-            crimeNumbers.push(crime[1][0])
-            otherCrimeNumbers.push(crime[1][1])
-            roberyCrimeNumbers.push(crime[1][2])
+            crimeNumbers.push(crime[1][0].toFixed(1))
+            otherCrimeNumbers.push(crime[1][1].toFixed(1))
+            roberyCrimeNumbers.push(crime[1][2].toFixed(1))
         })
 
         
@@ -107,7 +107,8 @@ class Charts extends Component {
         const gamesNumbers = []
         gameData.sort().map((game) => {
 
-            gamesNumbers.push(game[1])
+            gamesNumbers.push(game[1][0].toFixed(1))
+           
             gamesLabels.push(game[0])
         })
         const colors = {
