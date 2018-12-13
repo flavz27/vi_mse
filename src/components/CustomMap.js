@@ -19,7 +19,6 @@ class CustomMap extends Component {
                 <Map
                     center={[0, 30]} // starting position [lng, lat]
                     zoom={[0.75]}// starting zoom
-
                     style="mapbox://styles/mapbox/dark-v9"
                     containerStyle={{
                         height: "100%",
@@ -30,12 +29,12 @@ class CustomMap extends Component {
 
                     }}
                 >
-                    {/* <Layer
+                    <Layer
                         type="symbol"
                         id="marker"
                         layout={{ "icon-image": "marker-15" }}>
-                        <Feature coordinates={[0, 0]} />
-                    </Layer> */}
+                        <Feature coordinates={[-103.825761, 38.298146]} />
+                    </Layer>
                 </Map>
             </div>
         )

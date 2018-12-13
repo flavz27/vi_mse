@@ -16,13 +16,12 @@ class Timeline extends Component {
             <div className="timelineContainer">
                 <h3>{this.props.selectedYear}</h3>
                 <div className="slidecontainer">
-                    <input type="range" min="1980" max="2016" step="1" 
+                    <input type="range" min="2003" max="2015" step="1" 
                     value={this.props.selectedYear} className="slider" id="myRange" 
                     onChange={e => this.handleChange(e)} />
 
                 </div>
             </div>
-
         )
     }
 }

@@ -108,7 +108,7 @@ class App extends Component {
       <div className="App">
         <div className="header">
           <h1>Video games and crime</h1>
-          <p>lorem ipsum</p>
+          <p>Is there a corelation between video games and violence ? Let's find out using data. We will be using game sales numbers and crime statistics.</p>
         </div>
         <Timeline onSelectYear={this.handleSelectedYear} {...this.state} />
         <CustomMap />
@@ -125,7 +125,8 @@ class App extends Component {
           this.state.crimesLoaded && this.state.gamesLoaded &&
           <Charts crimes={this.state.crimes} 
                   selectedRegion={this.state.selectedRegion}
-                   gamesSales={this.state.gamesSales}/>
+                   gamesSales={this.state.gamesSales}
+                   selectedYear={this.state.selectedYear}/>
         }
       </div>
     );

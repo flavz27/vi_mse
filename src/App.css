@@ -66,9 +66,15 @@ div.gamesContainer{
   height: 500px;
   right: 0;
   background-color: #37474F;
-  float:right;
+  float: right;
   display: inline-block;
 
+}
+h2.selectedRegionTitle{
+  font-size:2em;
+  color: #37474F;
+  font-weight: bolder;
+  letter-spacing: 4px;
 }
 
 h2.titletwo{
@@ -137,7 +143,13 @@ div.slidecontainer {
 
 div.lineChart{
   width: 50%;
+  display: inline-block;
+}
 
+div.stats{
+  width:50%;
+  display: inline-block;
+  float:right;
 }
 
 div.crimeChart, div.gameSalesChart{
@@ -152,4 +164,31 @@ div.crimeChart{
 div.gameSalesChart{
   display:inline-block;
   right:0;
+}
+
+/*data analysis*/
+
+h2.negativeComparison, h2.positiveComparison{
+  text-align: left;
+  padding-left: 20px;
+  font-size: 1.5em;
+}
+
+h2.negativeComparison {
+  color:red;
+}
+
+h2.positiveComparison {
+  color:green;
+}
+
+h3.previousyeartitle {
+  text-align: left;
+  padding-left: 20px;
+  color: #1f2123;
+}
+
+span.comparisonTitle{
+  width:150px;
+  display:inline-block;
 }
