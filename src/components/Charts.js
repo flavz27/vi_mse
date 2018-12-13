@@ -5,6 +5,8 @@ import { Line } from 'react-chartjs-2';
 class Charts extends Component {
 
     render() {
+        console.log(this.props.gamesSales)
+        console.log(this.props.crimes)
 
         const crimes = []
         for (let i = 0; i < this.props.crimes.length; i++) {
@@ -27,7 +29,7 @@ class Charts extends Component {
         const gameData = []
         for (let i = 0; i < this.props.gamesSales.length; i++) {
             if (labelsTable.includes(this.props.gamesSales[i].yearOfRelease)) {
-                // console.log(this.props.gamesSales[i]) //TODO not done
+                //  console.log(this.props.gamesSales[i]) //TODO not done
                 gameData.push(this.props.gamesSales[i].northAmericaSales)
             }
         }
