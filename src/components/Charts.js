@@ -3,10 +3,18 @@ import '../App.css';
 import { Line } from 'react-chartjs-2';
 
 class Charts extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSelectedRegion = this.handleSelectedRegion.bind(this)
+    }
+    handleSelectedRegion = (e) => {
+        this.props.onSelectRegion(e.target.value);
+        //console.log("in chart handle",e.target.value);
+    }
 
     render() {
-
-
+        console.log("game data",this.props.gameSales)
+        console.log("crime data",this.props.crimes)
         const crimes = []
         //filter by region
         for (let i = 0; i < this.props.crimes.length; i++) {
@@ -19,13 +27,11 @@ class Charts extends Component {
         const crimeData = [];
         crimes.map((crime) => {
 
-            const calculatedValue = crime.crimeRate + crime.otherRate + crime.robberyRate;
-
             crimeData.push([crime.year, crime.crimeRate, crime.otherRate, crime.robberyRate]) //TODO calculations are false
 
         });
 
-        console.log("data", crimeData);
+       // console.log("data", crimeData);
         const crimeNumbers = []
         const otherCrimeNumbers = []
         const roberyCrimeNumbers = []
@@ -36,7 +42,7 @@ class Charts extends Component {
             otherCrimeNumbers.push(crime[2])
             roberyCrimeNumbers.push(crime[3])
         })
-        console.log(crimeData)
+       // console.log(crimeData)
         const crimesYearComparison = 0;
         // const dataFromThisYear = crimeData[this.props.selectedYear]
         // //const crimesYearComparison = (crimeData[this.props.selectedYear][1] - crimeData[this.props.selectedYear-1][1])/crimeData[this.props.selectedYear-1][1];
@@ -45,7 +51,8 @@ class Charts extends Component {
         // GAMES SALES
         const regions = {
             "AMERICA": "northAmericaSales",
-            "EUROPE": "euSales"
+            "EUROPE": "europeSales",
+            "ASIA" : "japanSales"
         }
         const gameData = []
         for (let i = 0; i < this.props.gamesSales.length; i++) {
@@ -272,7 +279,14 @@ class Charts extends Component {
 
         return (
             <div className="chartsContainer">
-                <h2 className="selectedRegionTitle">{this.props.selectedRegion}</h2>
+                <div className="headerChart">
+                    <h2 className="selectedRegionTitle">{this.props.selectedRegion}</h2>
+                    <select onChange={e => this.handleSelectedRegion(e)}>
+                        <option value="AMERICA">America</option>
+                        <option value="EUROPE">Europe</option>
+                        <option value="ASIA">Asia</option>
+                    </select>
+                </div>
                 <div className="lineChart">
                     <div className="crimeChart">
                         <Line data={crimeTableData}
@@ -301,7 +315,7 @@ class Charts extends Component {
                                 maintainAspectRatio: false
                             }} />
                     </div> */}
-                    
+
                     <div className="gameSalesChart">
                         <Line data={gameSalesData}
                             options={options}
@@ -315,14 +329,12 @@ class Charts extends Component {
 
                 </div>
                 <div className="stats">
-                    <h3 className="previousyeartitle">From previous year</h3>
+                    <h3 className="previousyeartitle">Comparison with the previous year</h3>
                     <Comparison value={gamesYearComparison} title="Game Sales" />
-                    <Comparison value={crimesYearComparison} title="Crimes"/>
+                    <Comparison value={crimesYearComparison} title="Crimes" />
                     {/* <h2 className="gamescomparison" id="{}">{gamesYearComparison} % </h2>
                             <h2 className="crimecomparison">{crimesYearComparison}% </h2> */}
                 </div>
-
-
             </div>
         )
     }
