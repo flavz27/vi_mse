@@ -293,81 +293,7 @@ class Charts extends Component {
                 ]
             }]
         };
-        // const roberyCrimeTableData = {
-        //     labels: crimeLabels,
-        //     datasets: [
-        //         {
-        //             label: 'Robery Crimes',
-        //             fill: false,
-        //             lineTension: 0.5,
-        //             backgroundColor: '#F95F62',
-        //             borderColor: 'rgba(75,192,192,1)',
-        //             borderCapStyle: 'butt',
-        //             borderDash: [],
-        //             borderDashOffset: 0.0,
-        //             borderJoinStyle: 'miter',
-        //             pointBorderColor: 'rgba(75,192,192,1)',
-        //             pointBackgroundColor: '#fff',
-        //             pointBorderWidth: 1,
-        //             pointHoverRadius: 5,
-        //             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        //             pointHoverBorderColor: 'rgba(220,220,220,1)',
-        //             pointHoverBorderWidth: 2,
-        //             pointRadius: 1,
-        //             pointHitRadius: 10,
-        //             data: roberyCrimeNumbers
-        //         }
-
-        //     ]
-        // };
-        // const otherCrimeTableData = {
-        //     labels: crimeLabels,
-        //     datasets: [
-        //         {
-        //             label: 'Other crimes',
-        //             fill: false,
-        //             lineTension: 0.5,
-        //             backgroundColor: '#F95F62',
-        //             borderColor: 'rgba(75,192,192,1)',
-        //             borderCapStyle: 'butt',
-        //             borderDash: [],
-        //             borderDashOffset: 0.0,
-        //             borderJoinStyle: 'miter',
-        //             pointBorderColor: 'rgba(75,192,192,1)',
-        //             pointBackgroundColor: '#fff',
-        //             pointBorderWidth: 1,
-        //             pointHoverRadius: 5,
-        //             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        //             pointHoverBorderColor: 'rgba(220,220,220,1)',
-        //             pointHoverBorderWidth: 2,
-        //             pointRadius: 1,
-        //             pointHitRadius: 10,
-        //             data: otherCrimeNumbers
-        //         },
-        //         {
-        //             label: 'Robery Crimes',
-        //             fill: false,
-        //             lineTension: 0.5,
-        //             backgroundColor: 'pink',
-        //             borderColor: 'rgba(75,192,192,1)',
-        //             borderCapStyle: 'butt',
-        //             borderDash: [],
-        //             borderDashOffset: 0.0,
-        //             borderJoinStyle: 'miter',
-        //             pointBorderColor: 'rgba(75,192,192,1)',
-        //             pointBackgroundColor: '#fff',
-        //             pointBorderWidth: 1,
-        //             pointHoverRadius: 5,
-        //             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        //             pointHoverBorderColor: 'rgba(220,220,220,1)',
-        //             pointHoverBorderWidth: 2,
-        //             pointRadius: 1,
-        //             pointHitRadius: 10,
-        //             data: roberyCrimeNumbers
-        //         }
-
-        //     ]
-        // };
+        
         const gameSalesOptions = { //TODO not working
             annotation: {
                 annotations: [
@@ -417,6 +343,7 @@ class Charts extends Component {
                 </div>
                 <div className="lineChart">
                     <div className="crimeChart">
+                    <h3 className="chartTitle">Crimes (per 100'000 people)</h3>
                         <Line data={crimeTableData}
                             options={options}
                             width={500}
@@ -427,6 +354,7 @@ class Charts extends Component {
                     </div>
                     
                     <div className="gameSalesChart">
+                    <h3 className="chartTitle">Video games sales (in M of copies)</h3>
                         <Line data={gameSalesData}
                             options={gameSalesOptions}
                             width={300}
