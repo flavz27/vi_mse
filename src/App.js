@@ -20,7 +20,21 @@ class App extends Component {
       gamesLoaded: false,
       crimesLoaded: false,
       changedYear: false,
-      selectedRegion:"AMERICA"
+      selectedRegion:"AMERICA",
+      selectedCoordinates:{
+        long: -103.825761, 
+        lat: 38.298146
+      },
+      coordinatesTable:{
+        "ASIA":{
+          long: 138.041361, 
+          lat: 35.834017 
+        },
+        "EUROPE":{
+          long: 138.041361, 
+          lat: 35.834017
+        }
+      }
     }
     this.fetchGames()
     this.fetchCrimes()
@@ -34,7 +48,8 @@ class App extends Component {
 
   handleSelectedRegion = (selectedRegionVal) => {
     this.setState({ selectedRegion: selectedRegionVal })
-
+    this.setState({selectedCoordinates:this.state.coordinatesTable.selectedRegionVal})
+    console.log("coordinates:",this.state.selectedCoordinates)
   }
 
   handleUpdateGames = (something) => {
@@ -116,7 +131,7 @@ class App extends Component {
           <p>Is there a correlation between video games and violence ? Let's find out using data. We will be using game sales numbers and crime statistics.</p>
         </div>
         <Timeline onSelectYear={this.handleSelectedYear} {...this.state} />
-        <CustomMap   />
+        <CustomMap  selectedCoordinates={this.state.selectedCoordinates} />
         {
           this.state.gamesLoaded && this.state.releasedGamesYear &&
           <ReleasedGames

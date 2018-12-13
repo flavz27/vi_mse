@@ -13,8 +13,8 @@ class Charts extends Component {
     }
 
     render() {
-        console.log("game data", this.props.gameSales)
-        console.log("crime data", this.props.crimes)
+
+
         const crimes = []
         //filter by region
         for (let i = 0; i < this.props.crimes.length; i++) {
@@ -23,25 +23,44 @@ class Charts extends Component {
             }
         }
 
+        const reducer = function (acc, current) {
+            const [key, ...value] = current
+            if (acc.has(key)) {
+                const nums = acc.get(key)
+                nums.forEach((e, i) => nums[i] = e + value[i])
+                acc.set(key, nums)
+            }
+            else
+                acc.set(key, value)
+            return acc
+        }
+
         const crimeLabels = [];
-        const crimeData = [];
+        let crimeData = [];
         crimes.map((crime) => {
-
-            crimeData.push([crime.year, crime.crimeRate, crime.otherRate, crime.robberyRate]) //TODO calculations are false
-
+            crimeData.push([crime.year, crime.crimeRate, crime.otherRate, crime.robberyRate])
         });
 
-         //console.log("crime data PA", crimeData);
+        const testcrimeData = crimeData.reduce(reducer, new Map())
+
+        crimeData = Array.from(testcrimeData)
+
         const crimeNumbers = []
         const otherCrimeNumbers = []
         const roberyCrimeNumbers = []
-        //create two tables
-        crimeData.map((crime) => {
+
+
+        crimeData.sort().map((crime) => {
+            console.log(crime)
             crimeLabels.push(crime[0])
-            crimeNumbers.push(crime[1])
-            otherCrimeNumbers.push(crime[2])
-            roberyCrimeNumbers.push(crime[3])
+            crimeNumbers.push(crime[1][0])
+            otherCrimeNumbers.push(crime[1][1])
+            roberyCrimeNumbers.push(crime[1][2])
         })
+
+        
+
+
         // console.log(crimeData)
         const crimesYearComparison = 0;
         // const dataFromThisYear = crimeData[this.props.selectedYear]
@@ -54,13 +73,18 @@ class Charts extends Component {
             "EUROPE": "europeSales",
             "ASIA": "japanSales"
         }
-        const gameData = []
+        let gameData = []
         for (let i = 0; i < this.props.gamesSales.length; i++) {
             if (crimeLabels.includes(this.props.gamesSales[i].yearOfRelease)) {
                 gameData.push([this.props.gamesSales[i].yearOfRelease, this.props.gamesSales[i][regions[this.props.selectedRegion]]])
             }
         }
-        console.log("data PA", gameData)
+
+
+
+
+        const testData = gameData.reduce(reducer, new Map())
+        gameData = [...testData]
 
         const gamesLabels = []
         const gamesNumbers = []
@@ -70,21 +94,19 @@ class Charts extends Component {
             gamesLabels.push(game[0])
         })
         const colors = {
-            "gold" : "#e6b214",
-            "blue": "rgba(75,192,192,1)" ,
-            "magenta" : "#F95F62",
-            "dark-blue" : "#246591",
-            "light-green" : "#77D353",
+            "gold": "#e6b214",
+            "blue": "rgba(75,192,192,1)",
+            "magenta": "#F95F62",
+            "dark-blue": "#246591",
+            "light-green": "#77D353",
             "dark-green": "#006D2C",
-            "orange":"#FF9052",
+            "orange": "#FF9052",
             "dark-red": "#CC3333",
-            "purple":"#976DD0",
-            "blue-grey":"#37474F"
-
-
+            "purple": "#976DD0",
+            "blue-grey": "#37474F"
         }
-            
-        
+
+
         //const gamesYearComparison = (gameData[this.props.selectedYear][1] - gameData[this.props.selectedYear-1][1])/gameData[this.props.selectedYear-1][1];
         const gamesYearComparison = 0
         const gameSalesData = {
@@ -100,8 +122,8 @@ class Charts extends Component {
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor:colors["light-green"],
-                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors["light-green"],
+                    pointBackgroundColor: colors["light-green"],
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: colors["light-green"],
@@ -127,7 +149,7 @@ class Charts extends Component {
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
                     pointBorderColor: colors.magenta,
-                    pointBackgroundColor: '#fff',
+                    pointBackgroundColor: colors.magenta,
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: colors.magenta,
@@ -148,7 +170,7 @@ class Charts extends Component {
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
                     pointBorderColor: colors.blue,
-                    pointBackgroundColor: '#fff',
+                    pointBackgroundColor: colors.blue,
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: colors.blue,
@@ -169,7 +191,7 @@ class Charts extends Component {
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
                     pointBorderColor: colors.gold,
-                    pointBackgroundColor: '#fff',
+                    pointBackgroundColor: colors.gold,
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: colors.gold,
@@ -203,12 +225,12 @@ class Charts extends Component {
             gameSalesYearLabel.push(game.name + " on " + game.platform);
             gameSalesYearData.push(game.globalSales)
         })
-        console.log(this.props.releasedGamesYear)
+
 
         const gamePieChartData = {
-            labels: gameSalesYearLabel.slice(0, 10),
+            labels: gameSalesYearLabel.slice(0, 5),
             datasets: [{
-                data: gameSalesYearData.slice(0, 10),
+                data: gameSalesYearData.slice(0, 5),
                 backgroundColor: [
                     colors.gold,
                     colors.blue,
@@ -220,7 +242,7 @@ class Charts extends Component {
                     colors["dark-red"],
                     colors.purple,
                     colors["dark-green"]
-                    
+
                 ],
                 hoverBackgroundColor: [
                     colors.gold,
@@ -233,7 +255,7 @@ class Charts extends Component {
                     colors["dark-red"],
                     colors.purple,
                     colors["dark-green"]
-                
+
                 ]
             }]
         };
@@ -312,10 +334,28 @@ class Charts extends Component {
 
         //     ]
         // };
-
+        const gameSalesOptions = { //TODO not working
+            annotation: {
+                annotations: [
+                    {
+                        type: "line",
+                        mode: "vertical",
+                        scaleID: "x-axis-0",
+                        value: this.props.selectedYear,
+                        borderColor: "red",
+                        label: {
+                            content: this.props.selectedYear,
+                            enabled: true,
+                            position: "top"
+                        }
+                    }
+                ]
+            }
+        }
         const options = {
             ...global,
             responsive: true,
+
             scales: {
                 yAxes: [
                     {
@@ -390,7 +430,7 @@ class Charts extends Component {
 
                     <div className="gameSalesChart">
                         <Line data={gameSalesData}
-                            options={options}
+                            options={gameSalesOptions}
                             width={300}
                             height={300}
                             options={{
@@ -410,7 +450,7 @@ class Charts extends Component {
 
                 </div>
                 <div className="gameSalesPieChart">
-                <h3 className="previousyeartitle">Top video games sales for {this.props.selectedYear} (in M of $)</h3>
+                    <h3 className="previousyeartitle">Top video games sales for {this.props.selectedYear} (in M of $)</h3>
                     <Pie data={gamePieChartData}
                         options={piechartOptions}
                     />

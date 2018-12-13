@@ -56,14 +56,14 @@ div.header p {
 
 div.mapContainer{
   width:70%;
-  height:500px;
+  height:400px;
   left: 0;
   background-color: #191A1A;
   display: inline-block;
 }
 div.gamesContainer{
   width:30%;
-  height: 500px;
+  height: 400px;
   right: 0;
   background-color: #37474F;
   float: right;
@@ -183,17 +183,17 @@ div.gameSalesChart{
 
 h2.negativeComparison, h2.positiveComparison{
   text-align: center;
-  
+
   padding-left: 20px;
   font-size: 1.5em;
 }
 
 h2.negativeComparison {
-  color:red;
+  color:#CC3333;
 }
 
 h2.positiveComparison {
-  color:green;
+  color:#006D2C;
 }
 
 h3.previousyeartitle {
