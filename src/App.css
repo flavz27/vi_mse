@@ -183,6 +183,7 @@ div.gameSalesChart{
 
 h2.negativeComparison, h2.positiveComparison{
   text-align: center;
+  
   padding-left: 20px;
   font-size: 1.5em;
 }
