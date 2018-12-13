@@ -24,7 +24,7 @@ class Charts extends Component {
         }
         const crimeReducer = function (acc, current) {
             const [key, ...value] = current
-            
+
             if (acc.has(key)) {
                 const nums = acc.get(key)
                 nums.forEach((e, i) => nums[i] = e + value[i])
@@ -70,19 +70,24 @@ class Charts extends Component {
             roberyCrimeNumbers.push(crime[1][2].toFixed(1))
         })
 
-        
 
 
-        
+
+
         const datafromThisYear = []
         const datafromLastYear = []
-        crimeData.forEach((crime, i) => {if(crime[0] == this.props.selectedYear) datafromThisYear.push(crime[1])})
-        crimeData.forEach((crime, i) => {if(crime[0] == this.props.selectedYear-1) datafromLastYear.push(crime[1])})
-        const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0])+parseFloat(datafromThisYear[0][1])+parseFloat(datafromThisYear[0][2]))/3
-        const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0])+parseFloat(datafromLastYear[0][1])+parseFloat(datafromLastYear[0][2]))/3
+        let crimesYearComparison = 0
+        crimeData.forEach((crime, i) => { if (crime[0] == this.props.selectedYear) datafromThisYear.push(crime[1]) })
+        if (!this.props.selectedYear - 1) {
+            console.log("in if", this.props.selectedYear - 1)
+        } else {
+            crimeData.forEach((crime, i) => { if (crime[0] == this.props.selectedYear - 1) datafromLastYear.push(crime[1]) })
+            const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0]) + parseFloat(datafromThisYear[0][1]) + parseFloat(datafromThisYear[0][2])) / 3
+            const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0]) + parseFloat(datafromLastYear[0][1]) + parseFloat(datafromLastYear[0][2])) / 3
 
-        const crimesYearComparison = ((uniqueValueThisYear-uniqueValueLastYear)/uniqueValueLastYear*100).toFixed(1)
-        console.log("this", crimesYearComparison);
+            crimesYearComparison = ((uniqueValueThisYear - uniqueValueLastYear) / uniqueValueLastYear * 100).toFixed(1)
+            console.log("this", crimesYearComparison);
+        }
 
         // GAMES SALES
         const regions = {
@@ -108,7 +113,7 @@ class Charts extends Component {
         gameData.sort().map((game) => {
 
             gamesNumbers.push(game[1][0].toFixed(1))
-           
+
             gamesLabels.push(game[0])
         })
         const colors = {
@@ -126,14 +131,14 @@ class Charts extends Component {
 
 
         //const gamesYearComparison = (gameData[this.props.selectedYear][1] - gameData[this.props.selectedYear-1][1])/gameData[this.props.selectedYear-1][1];
-        
+
 
         const gamesdatafromThisYear = []
         const gamesdatafromLastYear = []
-        gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear) gamesdatafromThisYear.push(game[1][0])})
-        gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear-1) gamesdatafromLastYear.push(game[1][0])})
+        gameData.forEach((game, i) => { if (game[0] == this.props.selectedYear) gamesdatafromThisYear.push(game[1][0]) })
+        gameData.forEach((game, i) => { if (game[0] == this.props.selectedYear - 1) gamesdatafromLastYear.push(game[1][0]) })
 
-        const gamesYearComparison = ((gamesdatafromThisYear-gamesdatafromLastYear) / gamesdatafromThisYear*100).toFixed(1)
+        const gamesYearComparison = ((gamesdatafromThisYear - gamesdatafromLastYear) / gamesdatafromThisYear * 100).toFixed(1)
         console.log(gamesdatafromLastYear)
         // gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear-1) datafromLastYear.push(game[1])})
         // const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0])+parseFloat(datafromThisYear[0][1])+parseFloat(datafromThisYear[0][2]))/3
@@ -293,7 +298,7 @@ class Charts extends Component {
                 ]
             }]
         };
-        
+
         const gameSalesOptions = { //TODO not working
             annotation: {
                 annotations: [
@@ -311,20 +316,20 @@ class Charts extends Component {
                     }
                 ]
             }
-            
+
         }
 
-        
+
         const options = {
             ...global,
             responsive: true,
             scales: {
                 yAxes: [{
                     scaleLabel: {
-                      display: true,
-                      labelString: 'probability'
+                        display: true,
+                        labelString: 'probability'
                     }
-                  }]
+                }]
             }
         }
 
@@ -343,7 +348,7 @@ class Charts extends Component {
                 </div>
                 <div className="lineChart">
                     <div className="crimeChart">
-                    <h3 className="chartTitle">Crimes (per 100'000 people)</h3>
+                        <h3 className="chartTitle">Crimes (per 100'000 people)</h3>
                         <Line data={crimeTableData}
                             options={options}
                             width={500}
@@ -352,11 +357,11 @@ class Charts extends Component {
                                 maintainAspectRatio: false
                             }} />
 
-                            <p className="lineLegend">years</p>
+                        <p className="lineLegend">years</p>
                     </div>
-                    
+
                     <div className="gameSalesChart">
-                    <h3 className="chartTitle">Video games sales (in M of copies)</h3>
+                        <h3 className="chartTitle">Video games sales (in M of copies)</h3>
                         <Line data={gameSalesData}
                             options={gameSalesOptions}
                             width={300}
@@ -364,7 +369,7 @@ class Charts extends Component {
                             options={{
                                 maintainAspectRatio: false
                             }} />
-                            <p className="lineLegend">years</p>
+                        <p className="lineLegend">years</p>
                     </div>
 
 
@@ -390,11 +395,11 @@ class Charts extends Component {
 }
 class Comparison extends Component {
     render() {
-        if (this.props.value < 0 && this.props.title==="Crimes") {
+        if (this.props.value < 0 && this.props.title === "Crimes") {
             return (<h2 className="positiveComparison"><span className="comparisonTitle">{this.props.title}</span> {this.props.value} % </h2>)
-        } else if(this.props.value < 0 && this.props.title==="Game Sales") {
+        } else if (this.props.value < 0 && this.props.title === "Game Sales") {
             return (<h2 className="negativeComparison"><span className="comparisonTitle">{this.props.title}</span> {this.props.value} % </h2>)
-        } else if(this.props.value >= 0 && this.props.title==="Crimes") {
+        } else if (this.props.value >= 0 && this.props.title === "Crimes") {
             return (<h2 className="negativeComparison"><span className="comparisonTitle">{this.props.title}</span> + {this.props.value} % </h2>)
         } else {
             return (<h2 className="positiveComparison"><span className="comparisonTitle">{this.props.title}</span> + {this.props.value} % </h2>)
