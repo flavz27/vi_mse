@@ -182,7 +182,7 @@ div.gameSalesChart{
 /*data analysis*/
 
 h2.negativeComparison, h2.positiveComparison{
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
   font-size: 1.5em;
 }
@@ -202,6 +202,5 @@ h3.previousyeartitle {
 }
 
 span.comparisonTitle{
-  width:150px;
-  display:inline-block;
+
 }
