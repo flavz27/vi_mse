@@ -70,7 +70,7 @@ div.gamesContainer{
   display: inline-block;
 
 }
-h2.selectedRegionTitle{
+h2.selectedRegionTitle, select.selectedRegionTitle{
   font-size:2em;
   color: #37474F;
   font-weight: bolder;
@@ -152,8 +152,15 @@ div.lineChart{
   display: inline-block;
 }
 
+div.gameSalesPieChart{
+  width:30%;
+  /* display:inline-block; */
+  top:0;
+  float:right;
+}
+
 div.stats{
-  width:50%;
+  width:20%;
   display: inline-block;
   float:right;
 }
@@ -189,7 +196,7 @@ h2.positiveComparison {
 }
 
 h3.previousyeartitle {
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
   color: #1f2123;
 }

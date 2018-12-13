@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Line } from 'react-chartjs-2';
+import { Line, Pie } from 'react-chartjs-2';
 
 class Charts extends Component {
     constructor(props) {
@@ -13,8 +13,8 @@ class Charts extends Component {
     }
 
     render() {
-        console.log("game data",this.props.gameSales)
-        console.log("crime data",this.props.crimes)
+        console.log("game data", this.props.gameSales)
+        console.log("crime data", this.props.crimes)
         const crimes = []
         //filter by region
         for (let i = 0; i < this.props.crimes.length; i++) {
@@ -31,7 +31,7 @@ class Charts extends Component {
 
         });
 
-       // console.log("data", crimeData);
+        // console.log("data", crimeData);
         const crimeNumbers = []
         const otherCrimeNumbers = []
         const roberyCrimeNumbers = []
@@ -42,7 +42,7 @@ class Charts extends Component {
             otherCrimeNumbers.push(crime[2])
             roberyCrimeNumbers.push(crime[3])
         })
-       // console.log(crimeData)
+        // console.log(crimeData)
         const crimesYearComparison = 0;
         // const dataFromThisYear = crimeData[this.props.selectedYear]
         // //const crimesYearComparison = (crimeData[this.props.selectedYear][1] - crimeData[this.props.selectedYear-1][1])/crimeData[this.props.selectedYear-1][1];
@@ -52,7 +52,7 @@ class Charts extends Component {
         const regions = {
             "AMERICA": "northAmericaSales",
             "EUROPE": "europeSales",
-            "ASIA" : "japanSales"
+            "ASIA": "japanSales"
         }
         const gameData = []
         for (let i = 0; i < this.props.gamesSales.length; i++) {
@@ -164,6 +164,45 @@ class Charts extends Component {
                 }
 
             ]
+        };
+
+        //for current year, get all the sales.
+        //labels: game names
+        //data: sales in $
+        const piechartOptions = {
+            legend: {
+                display: false
+            }
+        }
+        const gameSalesForYear = []
+        this.props.gamesSales.map((game) => {
+            if (game.yearOfRelease == this.props.selectedYear) {
+                gameSalesForYear.push(game)
+            }
+        })
+        const gameSalesYearLabel = [];
+        const gameSalesYearData = [];
+        gameSalesForYear.map((game) => {
+            gameSalesYearLabel.push(game.name + " " + game.platform);
+            gameSalesYearData.push(game.globalSales)
+        })
+        console.log(this.props.releasedGamesYear)
+
+        const gamePieChartData = {
+            labels: gameSalesYearLabel.slice(0, 10),
+            datasets: [{
+                data: gameSalesYearData.slice(0, 10),
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ]
+            }]
         };
         // const roberyCrimeTableData = {
         //     labels: crimeLabels,
@@ -334,6 +373,14 @@ class Charts extends Component {
                     <Comparison value={crimesYearComparison} title="Crimes" />
                     {/* <h2 className="gamescomparison" id="{}">{gamesYearComparison} % </h2>
                             <h2 className="crimecomparison">{crimesYearComparison}% </h2> */}
+
+
+                </div>
+                <div className="gameSalesPieChart">
+                <h3 className="previousyeartitle">Top video games sales for {this.props.selectedYear} (in M of $)</h3>
+                    <Pie data={gamePieChartData}
+                        options={piechartOptions}
+                    />
                 </div>
             </div>
         )
