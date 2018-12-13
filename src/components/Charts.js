@@ -22,6 +22,18 @@ class Charts extends Component {
                 crimes.push(this.props.crimes[i]);
             }
         }
+        const crimeReducer = function (acc, current) {
+            const [key, ...value] = current
+            
+            if (acc.has(key)) {
+                const nums = acc.get(key)
+                nums.forEach((e, i) => nums[i] = e + value[i])
+                acc.set(key, nums)
+            }
+            else
+                acc.set(key, value)
+            return acc
+        }
 
         const reducer = function (acc, current) {
             const [key, ...value] = current
@@ -61,11 +73,16 @@ class Charts extends Component {
         
 
 
-        // console.log(crimeData)
-        const crimesYearComparison = 0;
-        // const dataFromThisYear = crimeData[this.props.selectedYear]
-        // //const crimesYearComparison = (crimeData[this.props.selectedYear][1] - crimeData[this.props.selectedYear-1][1])/crimeData[this.props.selectedYear-1][1];
-        // console.log("year",dataFromThisYear);
+        
+        const datafromThisYear = []
+        const datafromLastYear = []
+        crimeData.forEach((crime, i) => {if(crime[0] == this.props.selectedYear) datafromThisYear.push(crime[1])})
+        crimeData.forEach((crime, i) => {if(crime[0] == this.props.selectedYear-1) datafromLastYear.push(crime[1])})
+        const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0])+parseFloat(datafromThisYear[0][1])+parseFloat(datafromThisYear[0][2]))/3
+        const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0])+parseFloat(datafromLastYear[0][1])+parseFloat(datafromLastYear[0][2]))/3
+
+        const crimesYearComparison = ((uniqueValueThisYear-uniqueValueLastYear)/uniqueValueLastYear*100).toFixed(1)
+        console.log("this", crimesYearComparison);
 
         // GAMES SALES
         const regions = {
@@ -108,7 +125,23 @@ class Charts extends Component {
 
 
         //const gamesYearComparison = (gameData[this.props.selectedYear][1] - gameData[this.props.selectedYear-1][1])/gameData[this.props.selectedYear-1][1];
-        const gamesYearComparison = 0
+        
+
+        const gamesdatafromThisYear = []
+        const gamesdatafromLastYear = []
+        gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear) gamesdatafromThisYear.push(game[1][0])})
+        gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear-1) gamesdatafromLastYear.push(game[1][0])})
+
+        const gamesYearComparison = ((gamesdatafromThisYear-gamesdatafromLastYear) / gamesdatafromThisYear*100).toFixed(1)
+        console.log(gamesdatafromLastYear)
+        // gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear-1) datafromLastYear.push(game[1])})
+        // const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0])+parseFloat(datafromThisYear[0][1])+parseFloat(datafromThisYear[0][2]))/3
+        // const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0])+parseFloat(datafromLastYear[0][1])+parseFloat(datafromLastYear[0][2]))/3
+
+        // const crimesYearComparison = ((uniqueValueThisYear-uniqueValueLastYear)/uniqueValueLastYear*100).toFixed(1)
+        // console.log("this", crimesYearComparison);
+
+
         const gameSalesData = {
             labels: gamesLabels,
             datasets: [
@@ -351,38 +384,20 @@ class Charts extends Component {
                     }
                 ]
             }
+            
         }
+
+        
         const options = {
             ...global,
             responsive: true,
-
             scales: {
-                yAxes: [
-                    {
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                        id: 'y-axis-1',
-                        gridLines: {
-                            display: false
-                        },
-                        labels: {
-                            show: true
-                        }
-                    },
-                    {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        id: 'y-axis-2',
-                        gridLines: {
-                            display: false
-                        },
-                        labels: {
-                            show: true
-                        }
+                yAxes: [{
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'probability'
                     }
-                ]
+                  }]
             }
         }
 
@@ -409,25 +424,7 @@ class Charts extends Component {
                                 maintainAspectRatio: false
                             }} />
                     </div>
-                    {/* <div className="crimeChart">
-                        <Line data={roberyCrimeTableData}
-                            options={options}
-                            width={300}
-                            height={300}
-                            options={{
-                                maintainAspectRatio: false
-                            }} />
-                    </div>
-                    <div className="crimeChart">
-                        <Line data={otherCrimeTableData}
-                            options={options}
-                            width={300}
-                            height={300}
-                            options={{
-                                maintainAspectRatio: false
-                            }} />
-                    </div> */}
-
+                    
                     <div className="gameSalesChart">
                         <Line data={gameSalesData}
                             options={gameSalesOptions}
@@ -450,7 +447,7 @@ class Charts extends Component {
 
                 </div>
                 <div className="gameSalesPieChart">
-                    <h3 className="previousyeartitle">Top video games sales for {this.props.selectedYear} (in M of $)</h3>
+                    <h3 className="previousyeartitle">Top video games sales for {this.props.selectedYear} (in M of copies)</h3>
                     <Pie data={gamePieChartData}
                         options={piechartOptions}
                     />
@@ -461,8 +458,12 @@ class Charts extends Component {
 }
 class Comparison extends Component {
     render() {
-        if (this.props.value < 0) {
+        if (this.props.value < 0 && this.props.title==="Crimes") {
+            return (<h2 className="positiveComparison"><span className="comparisonTitle">{this.props.title}</span> {this.props.value} % </h2>)
+        } else if(this.props.value < 0 && this.props.title==="Game Sales") {
             return (<h2 className="negativeComparison"><span className="comparisonTitle">{this.props.title}</span> {this.props.value} % </h2>)
+        } else if(this.props.value >= 0 && this.props.title==="Crimes") {
+            return (<h2 className="negativeComparison"><span className="comparisonTitle">{this.props.title}</span> + {this.props.value} % </h2>)
         } else {
             return (<h2 className="positiveComparison"><span className="comparisonTitle">{this.props.title}</span> + {this.props.value} % </h2>)
         }
