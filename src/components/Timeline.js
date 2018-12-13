@@ -14,7 +14,7 @@ class Timeline extends Component {
     render() {
         return (
             <div className="timelineContainer">
-                <h3>{this.props.selectedYear}</h3>
+                <h3 className="selectedYearInfo">{this.props.selectedYear}</h3>
                 <div className="slidecontainer">
                     <input type="range" min="2003" max="2015" step="1" 
                     value={this.props.selectedYear} className="slider" id="myRange" 
