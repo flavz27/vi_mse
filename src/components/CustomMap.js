@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import '../App.css';
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 class CustomMap extends Component {
-
+    shouldComponentUpdate() {
+        return false; // Will cause component to never re-render.
+    }
     render() {
 
         const Map = ReactMapboxGl({
@@ -11,11 +13,17 @@ class CustomMap extends Component {
         return (
             <div className="mapContainer">
                 <Map
+                    center={[0, 30]} // starting position [lng, lat]
+                    zoom={[0.75]}// starting zoom
                     style="mapbox://styles/mapbox/dark-v9"
-                containerStyle={{
-                    height: "500px",
-                    width: "900px"
-                }}
+                    containerStyle={{
+                        height: "500px",
+                        width: "900px"
+                        // position:"absolute",
+                        // top:0,
+                        // left:0
+
+                    }}
                 >
                     {/* <Layer
                         type="symbol"
@@ -26,6 +34,8 @@ class CustomMap extends Component {
                 </Map>
             </div>
         )
+
+
 
     }
 }

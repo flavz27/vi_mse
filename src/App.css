@@ -86,6 +86,9 @@ div.chartsContainer {
   border:pink 10px;
 }
 
+canvas.mapboxgl-canvas {
+  position: inherit !important;
+}
 
 /* SLIDER */
 
@@ -126,4 +129,11 @@ div.chartsContainer {
 
 div.slidecontainer {
   padding-bottom: 10px;
+}
+
+/**CHARTS*/
+
+div.lineChart{
+  width: 50%;
+
 }
