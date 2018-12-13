@@ -351,6 +351,8 @@ class Charts extends Component {
                             options={{
                                 maintainAspectRatio: false
                             }} />
+
+                            <p className="lineLegend">years</p>
                     </div>
                     
                     <div className="gameSalesChart">
@@ -362,6 +364,7 @@ class Charts extends Component {
                             options={{
                                 maintainAspectRatio: false
                             }} />
+                            <p className="lineLegend">years</p>
                     </div>
 
 

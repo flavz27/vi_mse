@@ -195,6 +195,11 @@ h2.negativeComparison {
 h2.positiveComparison {
   color:#006D2C;
 }
+p.lineLegend{
+  margin-top: 5px;
+  color: grey;
+  padding-bottom: 30px;
+}
 
 h3.previousyeartitle {
   text-align: center;
