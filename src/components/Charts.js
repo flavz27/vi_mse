@@ -31,7 +31,7 @@ class Charts extends Component {
 
         });
 
-        // console.log("data", crimeData);
+         //console.log("crime data PA", crimeData);
         const crimeNumbers = []
         const otherCrimeNumbers = []
         const roberyCrimeNumbers = []
@@ -60,6 +60,7 @@ class Charts extends Component {
                 gameData.push([this.props.gamesSales[i].yearOfRelease, this.props.gamesSales[i][regions[this.props.selectedRegion]]])
             }
         }
+        console.log("data PA", gameData)
 
         const gamesLabels = []
         const gamesNumbers = []
@@ -68,6 +69,22 @@ class Charts extends Component {
             gamesNumbers.push(game[1])
             gamesLabels.push(game[0])
         })
+        const colors = {
+            "gold" : "#e6b214",
+            "blue": "rgba(75,192,192,1)" ,
+            "magenta" : "#F95F62",
+            "dark-blue" : "#246591",
+            "light-green" : "#77D353",
+            "dark-green": "#006D2C",
+            "orange":"#FF9052",
+            "dark-red": "#CC3333",
+            "purple":"#976DD0",
+            "blue-grey":"#37474F"
+
+
+        }
+            
+        
         //const gamesYearComparison = (gameData[this.props.selectedYear][1] - gameData[this.props.selectedYear-1][1])/gameData[this.props.selectedYear-1][1];
         const gamesYearComparison = 0
         const gameSalesData = {
@@ -77,18 +94,18 @@ class Charts extends Component {
                     label: 'Video games sales',
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: '#F95F62',
-                    borderColor: '#F95F62',
+                    backgroundColor: colors["light-green"],
+                    borderColor: colors["light-green"],
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: '#F95F62',
+                    pointBorderColor:colors["light-green"],
                     pointBackgroundColor: '#fff',
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: '#F95F62',
-                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBackgroundColor: colors["light-green"],
+                    pointHoverBorderColor: colors["light-green"],
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
@@ -103,18 +120,18 @@ class Charts extends Component {
                     label: 'Crimes',
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: '#F95F62',
-                    borderColor: '#F95F62',
+                    backgroundColor: colors.magenta,
+                    borderColor: colors.magenta,
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: '#F95F62',
+                    pointBorderColor: colors.magenta,
                     pointBackgroundColor: '#fff',
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: '#F95F62',
-                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBackgroundColor: colors.magenta,
+                    pointHoverBorderColor: colors.magenta,
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
@@ -124,18 +141,18 @@ class Charts extends Component {
                     label: 'Robery Crimes',
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: 'rgba(75,192,192,1)',
-                    borderColor: 'rgba(75,192,192,1)',
+                    backgroundColor: colors.blue,
+                    borderColor: colors.blue,
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: 'rgba(75,192,192,1)',
+                    pointBorderColor: colors.blue,
                     pointBackgroundColor: '#fff',
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBackgroundColor: colors.blue,
+                    pointHoverBorderColor: colors.blue,
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
@@ -145,18 +162,18 @@ class Charts extends Component {
                     label: 'Other crimes',
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: '#ccb066',
-                    borderColor: '#ccb066',
+                    backgroundColor: colors.gold,
+                    borderColor: colors.gold,
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: '#ccb066',
+                    pointBorderColor: colors.gold,
                     pointBackgroundColor: '#fff',
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: '#ccb066',
-                    pointHoverBorderColor: '#ccb066',
+                    pointHoverBackgroundColor: colors.gold,
+                    pointHoverBorderColor: colors.gold,
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
@@ -183,7 +200,7 @@ class Charts extends Component {
         const gameSalesYearLabel = [];
         const gameSalesYearData = [];
         gameSalesForYear.map((game) => {
-            gameSalesYearLabel.push(game.name + " " + game.platform);
+            gameSalesYearLabel.push(game.name + " on " + game.platform);
             gameSalesYearData.push(game.globalSales)
         })
         console.log(this.props.releasedGamesYear)
@@ -193,14 +210,30 @@ class Charts extends Component {
             datasets: [{
                 data: gameSalesYearData.slice(0, 10),
                 backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    colors.gold,
+                    colors.blue,
+                    colors.magenta,
+                    colors["blue-grey"],
+                    colors["light-green"],
+                    colors.orange,
+                    colors["dark-blue"],
+                    colors["dark-red"],
+                    colors.purple,
+                    colors["dark-green"]
+                    
                 ],
                 hoverBackgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    colors.gold,
+                    colors.blue,
+                    colors.magenta,
+                    colors["blue-grey"],
+                    colors["light-green"],
+                    colors.orange,
+                    colors["dark-blue"],
+                    colors["dark-red"],
+                    colors.purple,
+                    colors["dark-green"]
+                
                 ]
             }]
         };
