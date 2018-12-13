@@ -6,9 +6,9 @@ class ReleasedGames extends Component {
   constructor(props) {
     super(props);
     //  this.changedYear = this.changedYear.bind(this);
-    this.state = {
-      releasedGamesYear: []
-    };
+    // this.state = {
+    //   releasedGamesYear: []
+    // };
 
     const timesupdated = 0;
   }
@@ -16,39 +16,61 @@ class ReleasedGames extends Component {
   componentDidUpdate() {
 
     console.log(this.props.selectedYear)
-  
+
   }
 
   componentDidMount() {
-    this.renderTopReleasedGames();
+    // this.renderTopReleasedGames();
   }
 
-  componentDidCatch() {
-    console.log("catch");
-  }
+  // componentDidCatch() {
+  //   console.log("catch");
+  // }
 
   renderTopReleasedGames() {
     console.log("render top released games")
-    const filteredGames = new Set();
+    // const filteredGames = new Set();
 
-    for (let i = 0; i < this.props.gamesSales.length; i++) {
-      if (this.props.gamesSales[i].yearOfRelease == this.props.selectedYear) {
+    // for (let i = 0; i < this.props.gamesSales.length; i++) {
+    //   if (this.props.gamesSales[i].yearOfRelease == this.props.selectedYear) {
 
-        filteredGames.add(this.props.gamesSales[i].name);
-      }
-    }
+    //     filteredGames.add(this.props.gamesSales[i].name);
+    //   }
+    // }
 
-    this.setState({ releasedGamesYear: [...filteredGames].slice(0, 5) })
+    // this.setState({ releasedGamesYear: [...filteredGames].slice(0, 5) })
   }
 
   render() {
+    console.log("in render", this.props.releasedGamesYear)
     return (
       <div className="gamesContainer"><h2 className="titletwo">Top 5 games of {this.props.selectedYear}</h2>
 
         <ul className="gamesListYear">
-          {this.state.releasedGamesYear.map(game => (
-            <Game name={game} />
-          ))}
+          {
+            this.props.releasedGamesYear &&
+            <div>
+              {/* {
+                let row = {}
+                for (let i = 0; i < props.releasedGamesYear.length; i++) {
+                <Game name={this.props.releasedGamesYear[i]}
+              } */}
+
+              {/* {this.props.releasedGamesYear.map(game => (
+             <Game name={game} />
+            ))} */}
+              <Game name={this.props.releasedGamesYear[0]} />
+              <Game name={this.props.releasedGamesYear[1]} />
+              <Game name={this.props.releasedGamesYear[2]} />
+              <Game name={this.props.releasedGamesYear[3]} />
+              <Game name={this.props.releasedGamesYear[4]} />
+
+
+
+            </div>
+          }
+
+
         </ul>
       </div>
     );

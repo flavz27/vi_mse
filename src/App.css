@@ -139,3 +139,17 @@ div.lineChart{
   width: 50%;
 
 }
+
+div.crimeChart, div.gameSalesChart{
+  height:300px;
+}
+
+div.crimeChart{
+  display:inline-block;
+  left:0;
+}
+
+div.gameSalesChart{
+  display:inline-block;
+  right:0;
+}

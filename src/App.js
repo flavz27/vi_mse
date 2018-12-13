@@ -16,7 +16,7 @@ class App extends Component {
       selectedYear: "2014",
       gamesSales: {},
       crimes: {},
-      releasedGamesYear: [],
+      releasedGamesYear: {},
       gamesLoaded: false,
       crimesLoaded: false,
       changedYear: false,
@@ -24,11 +24,12 @@ class App extends Component {
     }
     this.fetchGames()
     this.fetchCrimes()
+    
   }
 
   handleSelectedYear = (selectedYearVal) => {
     this.setState({ selectedYear: selectedYearVal, changedYear: true });
-
+    this.renderTopReleasedGames()
   }
 
   handleUpdateGames = (something) => {
@@ -38,6 +39,23 @@ class App extends Component {
 
   }
   componentDidUpdate() {
+
+  }
+
+  renderTopReleasedGames() {
+    console.log("render top released games")
+    const filteredGames = new Set();
+
+    for (let i = 0; i < this.state.gamesSales.length; i++) {
+      if (this.state.gamesSales[i].yearOfRelease == this.state.selectedYear) {
+
+        filteredGames.add(this.state.gamesSales[i].name);
+      }
+    }
+
+  
+    this.setState({ releasedGamesYear: [...filteredGames].slice(0, 5) })
+
 
   }
 
@@ -51,7 +69,7 @@ class App extends Component {
             gamesLoaded: true,
             gamesSales: result
           });
-
+          this.renderTopReleasedGames()
         },
         (error) => {
           this.setState({
@@ -95,9 +113,10 @@ class App extends Component {
         <Timeline onSelectYear={this.handleSelectedYear} {...this.state} />
         <CustomMap />
         {
-          this.state.gamesLoaded &&
+          this.state.gamesLoaded && this.state.releasedGamesYear &&
           <ReleasedGames
-            gamesSales={this.state.gamesSales}
+           
+            releasedGamesYear={this.state.releasedGamesYear}
             selectedYear={this.state.selectedYear}
             changedYear={this.state.changedYear}
           />
@@ -106,7 +125,7 @@ class App extends Component {
           this.state.crimesLoaded && this.state.gamesLoaded &&
           <Charts crimes={this.state.crimes} 
                   selectedRegion={this.state.selectedRegion}
-                  gamesSales={this.state.gamesSales}/>
+                   gamesSales={this.state.gamesSales}/>
         }
       </div>
     );

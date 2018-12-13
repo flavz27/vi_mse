@@ -3,39 +3,64 @@ import '../App.css';
 import { Line } from 'react-chartjs-2';
 
 class Charts extends Component {
-    
+
     render() {
 
         const crimes = []
         for (let i = 0; i < this.props.crimes.length; i++) {
             if (this.props.crimes[i].continent == this.props.selectedRegion) {
-              crimes.push(this.props.crimes[i]);
+                crimes.push(this.props.crimes[i]);
             }
-          }
-         
-          const labels = new Set();
-          const crimeData = []
-          crimes.map((crime)=>{
-      
+        }
+
+        const labels = new Set();
+        const crimeData = []
+        crimes.map((crime) => {
+
             labels.add(crime.year);
-            let calculatedValue= crime.crimeRate + crime.otherRate + crime.robberyRate;
+            let calculatedValue = crime.crimeRate + crime.otherRate + crime.robberyRate;
             crimeData.push(calculatedValue) //TODO calculations are false
-          
-          })
-          const labelsTable = [...labels]
-        
-          const gameData = []
-          for (let i = 0; i < this.props.gamesSales.length; i++) {
-            if(labelsTable.includes(this.props.gamesSales[i].yearOfRelease)) {
-                console.log(this.props.gamesSales[i]) //TODO not done
+
+        })
+        const labelsTable = [...labels]
+
+        const gameData = []
+        for (let i = 0; i < this.props.gamesSales.length; i++) {
+            if (labelsTable.includes(this.props.gamesSales[i].yearOfRelease)) {
+                // console.log(this.props.gamesSales[i]) //TODO not done
                 gameData.push(this.props.gamesSales[i].northAmericaSales)
             }
-          }
-
-          
+        }
 
 
-        const data = {
+
+        const gameSalesData = {
+            labels: [...labels],
+            datasets: [
+                {
+                    label: 'Video games sales',
+                    fill: false,
+                    lineTension: 0.5,
+                    backgroundColor: '#F95F62',
+                    borderColor: '#F95F62',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#F95F62',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#F95F62',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: gameData
+                }
+            ]
+        }
+        const crimeTableData = {
             labels: [...labels],
             datasets: [
                 {
@@ -58,79 +83,70 @@ class Charts extends Component {
                     pointRadius: 1,
                     pointHitRadius: 10,
                     data: crimeData
-                   // yAxisID: 'y-axis-1'
-                },
-                {
-                    label: 'Video games sales',
-                    fill: false,
-                    lineTension: 0.5,
-                    backgroundColor: '#F95F62',
-                    borderColor: '#F95F62',
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    pointBorderColor: '#F95F62',
-                    pointBackgroundColor: '#fff',
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: '#F95F62',
-                    pointHoverBorderColor: 'rgba(220,220,220,1)',
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: gameData
-                 //   yAxisID: 'y-axis-2'
                 }
+
             ]
         };
 
-        const options ={
+        const options = {
             ...global,
             responsive: true,
-            scales: {
-                yAxes: [
-                    {
-                      type: 'linear',
-                      display: true,
-                      position: 'left',
-                      id: 'y-axis-1',
-                      gridLines: {
-                        display: false
-                      },
-                      labels: {
-                        show: true
-                      }
-                    },
-                    {
-                      type: 'linear',
-                      display: true,
-                      position: 'right',
-                      id: 'y-axis-2',
-                      gridLines: {
-                        display: false
-                      },
-                      labels: {
-                        show: true
-                      }
-                    }
-                   ]
-            }
+            // scales: {
+            //     yAxes: [
+            //         {
+            //           type: 'linear',
+            //           display: true,
+            //           position: 'left',
+            //           id: 'y-axis-1',
+            //           gridLines: {
+            //             display: false
+            //           },
+            //           labels: {
+            //             show: true
+            //           }
+            //         },
+            //         {
+            //           type: 'linear',
+            //           display: true,
+            //           position: 'right',
+            //           id: 'y-axis-2',
+            //           gridLines: {
+            //             display: false
+            //           },
+            //           labels: {
+            //             show: true
+            //           }
+            //         }
+            //        ]
+            // }
         }
 
-      
-    
+
+
         return (
             <div className="chartsContainer">
                 {this.props.selectedRegion}
                 <div className="lineChart">
-                    <Line data={data}
-                     options={options}
-                        width={50}
+                <div className="crimeChart">
+                <Line data={crimeTableData}
+                        options={options}
+                        width={300}
                         height={300}
                         options={{
                             maintainAspectRatio: false
                         }} />
+                </div>
+                <div className="gameSalesChart">
+                <Line data={gameSalesData}
+                        options={options}
+                        width={300}
+                        height={300}
+                        options={{
+                            maintainAspectRatio: false
+                        }} />
+                </div>
+                   
+                   
                 </div>
 
 
