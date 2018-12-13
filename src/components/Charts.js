@@ -3,7 +3,7 @@ import '../App.css';
 import { Line } from 'react-chartjs-2';
 
 class Charts extends Component {
-
+    
     render() {
 
         const crimes = []
@@ -28,6 +28,7 @@ class Charts extends Component {
           for (let i = 0; i < this.props.gamesSales.length; i++) {
             if(labelsTable.includes(this.props.gamesSales[i].yearOfRelease)) {
                 console.log(this.props.gamesSales[i]) //TODO not done
+                gameData.push(this.props.gamesSales[i].northAmericaSales)
             }
           }
 
@@ -57,16 +58,76 @@ class Charts extends Component {
                     pointRadius: 1,
                     pointHitRadius: 10,
                     data: crimeData
+                   // yAxisID: 'y-axis-1'
+                },
+                {
+                    label: 'Video games sales',
+                    fill: false,
+                    lineTension: 0.5,
+                    backgroundColor: '#F95F62',
+                    borderColor: '#F95F62',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#F95F62',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#F95F62',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: gameData
+                 //   yAxisID: 'y-axis-2'
                 }
             ]
         };
+
+        const options ={
+            ...global,
+            responsive: true,
+            scales: {
+                yAxes: [
+                    {
+                      type: 'linear',
+                      display: true,
+                      position: 'left',
+                      id: 'y-axis-1',
+                      gridLines: {
+                        display: false
+                      },
+                      labels: {
+                        show: true
+                      }
+                    },
+                    {
+                      type: 'linear',
+                      display: true,
+                      position: 'right',
+                      id: 'y-axis-2',
+                      gridLines: {
+                        display: false
+                      },
+                      labels: {
+                        show: true
+                      }
+                    }
+                   ]
+            }
+        }
+
+      
+    
         return (
             <div className="chartsContainer">
                 {this.props.selectedRegion}
                 <div className="lineChart">
                     <Line data={data}
-                        width={100}
-                        height={500}
+                     options={options}
+                        width={50}
+                        height={300}
                         options={{
                             maintainAspectRatio: false
                         }} />
