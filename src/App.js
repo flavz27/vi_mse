@@ -49,7 +49,7 @@ class App extends Component {
   handleSelectedRegion = (selectedRegionVal) => {
     this.setState({ selectedRegion: selectedRegionVal })
     this.setState({selectedCoordinates:this.state.coordinatesTable.selectedRegionVal})
-    console.log("coordinates:",this.state.selectedCoordinates)
+    //console.log("coordinates:",this.state.selectedCoordinates)
   }
 
   handleUpdateGames = (something) => {

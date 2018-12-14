@@ -15,7 +15,7 @@ class ReleasedGames extends Component {
 
   componentDidUpdate() {
 
-    console.log(this.props.selectedYear)
+    //console.log(this.props.selectedYear)
 
   }
 
@@ -28,7 +28,7 @@ class ReleasedGames extends Component {
   // }
 
   renderTopReleasedGames() {
-    console.log("render top released games")
+    //console.log("render top released games")
     // const filteredGames = new Set();
 
     // for (let i = 0; i < this.props.gamesSales.length; i++) {
@@ -42,7 +42,7 @@ class ReleasedGames extends Component {
   }
 
   render() {
-    console.log("in render", this.props.releasedGamesYear)
+    //console.log("in render", this.props.releasedGamesYear)
     return (
       <div className="gamesContainer"><h2 className="titletwo">Top 5 games of {this.props.selectedYear}</h2>
 

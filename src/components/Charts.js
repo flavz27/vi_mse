@@ -63,7 +63,7 @@ class Charts extends Component {
 
 
         crimeData.sort().map((crime) => {
-            console.log(crime)
+            //console.log(crime)
             crimeLabels.push(crime[0])
             crimeNumbers.push(crime[1][0].toFixed(1))
             otherCrimeNumbers.push(crime[1][1].toFixed(1))
@@ -78,15 +78,17 @@ class Charts extends Component {
         const datafromLastYear = []
         let crimesYearComparison = 0
         crimeData.forEach((crime, i) => { if (crime[0] == this.props.selectedYear) datafromThisYear.push(crime[1]) })
-        if (!this.props.selectedYear - 1) {
-            console.log("in if", this.props.selectedYear - 1)
+        crimeData.forEach((crime, i) => { if (crime[0] == this.props.selectedYear - 1) datafromLastYear.push(crime[1]) })
+           
+        if (datafromLastYear.length<=0) {
+            //console.log("in if", datafromLastYear)
         } else {
             crimeData.forEach((crime, i) => { if (crime[0] == this.props.selectedYear - 1) datafromLastYear.push(crime[1]) })
             const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0]) + parseFloat(datafromThisYear[0][1]) + parseFloat(datafromThisYear[0][2])) / 3
             const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0]) + parseFloat(datafromLastYear[0][1]) + parseFloat(datafromLastYear[0][2])) / 3
 
             crimesYearComparison = ((uniqueValueThisYear - uniqueValueLastYear) / uniqueValueLastYear * 100).toFixed(1)
-            console.log("this", crimesYearComparison);
+           // console.log("this", crimesYearComparison);
         }
 
         // GAMES SALES
@@ -139,7 +141,7 @@ class Charts extends Component {
         gameData.forEach((game, i) => { if (game[0] == this.props.selectedYear - 1) gamesdatafromLastYear.push(game[1][0]) })
 
         const gamesYearComparison = ((gamesdatafromThisYear - gamesdatafromLastYear) / gamesdatafromThisYear * 100).toFixed(1)
-        console.log(gamesdatafromLastYear)
+       // console.log(gamesdatafromLastYear)
         // gameData.forEach((game, i) => {if(game[0] == this.props.selectedYear-1) datafromLastYear.push(game[1])})
         // const uniqueValueThisYear = (parseFloat(datafromThisYear[0][0])+parseFloat(datafromThisYear[0][1])+parseFloat(datafromThisYear[0][2]))/3
         // const uniqueValueLastYear = (parseFloat(datafromLastYear[0][0])+parseFloat(datafromLastYear[0][1])+parseFloat(datafromLastYear[0][2]))/3
